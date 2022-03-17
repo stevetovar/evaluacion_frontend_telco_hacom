@@ -3,6 +3,7 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 
 import { Author } from '../../interfaces/author.interface';
 import { Book } from '../../interfaces/book.interface';
+import { BookService } from '../../services/book.services';
 
 @Component({
     selector: 'app-author',
@@ -17,7 +18,7 @@ export class AuthorComponent implements OnInit {
     book: Book;
     author!: Author;
 
-    constructor() {
+    constructor(private bookService: BookService) {
         this.book = {
             id: undefined,
             title: undefined,
@@ -51,7 +52,8 @@ export class AuthorComponent implements OnInit {
     addAuthor(author: Author) {}
 
     saveBook(ev: Event, book: Book) {
-
+        // this.bookService.addBook(book)
+        //     .subscribe(resp => { console.log('resp', resp) })
     }
 
     @Output() resetBookEvent: EventEmitter<void> = new EventEmitter();

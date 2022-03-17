@@ -18,6 +18,9 @@ import { ContentComponent } from './components/content/content.component';
 import { TopHeaderComponent } from './components/top-header/top-header.component';
 import { MenuComponent } from './components/menu/menu.component';
 
+import { PrintbooleanPipe } from '../pipes/printboolean.pipe';
+import { PrintyearPipe } from '../pipes/printyear.pipe';
+import { MatPaginatorIntl } from '@angular/material/paginator';
 
 @NgModule({
     declarations: [
@@ -30,6 +33,8 @@ import { MenuComponent } from './components/menu/menu.component';
         ContentComponent,
         TopHeaderComponent,
         MenuComponent,
+        PrintbooleanPipe,
+        PrintyearPipe,
     ],
     // exports: [
     //     HomeComponent,
@@ -47,6 +52,10 @@ import { MenuComponent } from './components/menu/menu.component';
         EvaluationRoutingModule,
         MaterialModule,
         SharedModule,
-    ]
+    ],
+    providers: [{
+        provide: MatPaginatorIntl,
+        useClass: BookComponent
+    }]
 })
 export class EvaluationModule { }

@@ -2,8 +2,8 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 
-import { Book } from "../interfaces/book.interface";
 import { environment } from '../../../environments/environment';
+import { Book } from "../interfaces/book.interface";
 
 @Injectable({
     providedIn: 'root',
@@ -15,5 +15,9 @@ export class BookService {
 
     getBooks():Observable<Book[]> {
         return this.http.get<Book[]>(`${this.baseUrl}/book`);
+    }
+
+    addBook(book: Book):Observable<Book> {
+        return this.http.post<Book>(`${this.baseUrl}/book`, book);
     }
 }

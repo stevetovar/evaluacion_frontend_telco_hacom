@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { EvaluationModule } from './evaluation/evaluation.module';
 import { SharedModule } from './shared/shared.module';
 import { StylePaginatorDirective } from './directives/style-paginator.directive';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
     declarations: [
@@ -20,6 +21,7 @@ import { StylePaginatorDirective } from './directives/style-paginator.directive'
         AppRoutingModule,
         EvaluationModule,
         SharedModule,
+        HttpClientModule,
     ],
     providers: [],
     bootstrap: [AppComponent]
