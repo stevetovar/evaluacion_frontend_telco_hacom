@@ -1,0 +1,123 @@
+@import "~src/scss/mixins.scss";
+
+.page {
+    padding-block: 2em;
+    .container + .container {
+        margin-top: 4em;
+    }
+}
+
+.container {
+    padding: 1em 1rem 2em;
+    max-width: 95%;
+    margin: auto;
+}
+
+.container__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-block: 1em;
+    flex-wrap: wrap;
+    gap: 2em;
+    // @include tablet-portrait() {}
+    .form {
+        margin-left: 1rem;
+    }
+    .btn-add-book {
+        margin-right: 1rem;
+        &--raised {
+            display: none;
+            @include tablet-portrait() {
+                display: block;
+            }
+        }
+        &--icon {
+            display: block;
+            transform: scale(1.2);
+            @include tablet-portrait() {
+                display: none;
+            }
+        }
+    }
+    .btn-close .mat-icon {
+        border-radius: 50%;
+        border: 1px solid #ddd;
+    }
+}
+
+.mat-elevation-z8{
+    overflow: auto;
+    table {
+        min-width: 800px;
+        overflow: hidden;
+    }
+    mat-paginator {
+        min-width: 800px;
+        padding-top: 1em;
+    }
+}
+
+
+.mat-column-id {
+    width: 5%;
+}
+
+.mat-column-title {
+    width: 20%;
+}
+
+.mat-column-description {
+    width: 25%;
+}
+
+.mat-column-year {
+    width: 10%;
+}
+
+.mat-column-author {
+    width: 20%;
+}
+
+.mat-column-published {
+    width: 5%;
+}
+
+.mat-column-action {
+    width: 15%;
+    text-align: center;
+}
+
+.mat-column-id,
+.mat-column-title,
+.mat-column-description,
+.mat-column-year,
+.mat-column-author,
+.mat-column-published,
+.mat-column-action {
+    border-right: 1px solid rgba(0,0,0,.12);
+}
+
+.mat-column-title,
+.mat-column-description,
+.mat-column-year,
+.mat-column-author,
+.mat-column-published {
+    padding-left: 16px;
+}
+
+.mat-button-base:not(.mat-icon-button) {
+    min-width: 120px;
+}
+
+.td-action {
+    .mat-button-base {
+        min-width: inherit;
+    }
+}
+
+th.mat-header-cell:last-of-type,
+td.mat-cell:last-of-type,
+td.mat-footer-cell:last-of-type {
+    padding-right: 0;
+}

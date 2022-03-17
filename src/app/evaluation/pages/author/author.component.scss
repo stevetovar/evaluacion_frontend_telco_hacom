@@ -1,0 +1,46 @@
+.container {
+    max-width: 90%;
+    margin: auto;
+}
+
+h3 {
+    text-align: left;
+    margin-left: 5%;
+    margin-top: 1em;
+    font-weight: 500;
+}
+
+.form-book {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    .form-field {
+        display: flex;
+        align-items: center;
+        width: 90%;
+        gap: 4em;
+        margin: auto;
+    }
+    mat-form-field {
+        width: 100%;
+    }
+    .form-field__footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        width: 90%;
+        padding: 2em 0;
+        margin: auto;
+    }
+    .btn-search {
+        justify-content: flex-end;
+        display: flex;
+        flex-grow: 1;
+    }
+}
+
+.mat-button-base {
+    min-width: 140px;
+    width: 34%;
+    max-width: 200px;
+}

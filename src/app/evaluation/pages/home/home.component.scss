@@ -1,0 +1,29 @@
+.app-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+}
+
+.app-body[fullscreen] {
+    display: flex;
+    align-items: start;
+    top: 60px;
+}
+
+.app-sidenav {
+    width: 20%;
+    min-width: 140px;
+    max-width: 220px;
+    border-right-color: #f6f6f6;
+}
+
+.app-content {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+// .mat-drawer-content {
+//     overflow: hidden;
+// }

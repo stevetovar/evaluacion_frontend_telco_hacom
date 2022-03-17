@@ -1,4 +1,48 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~src/scss/reset.scss";
+@import "~src/scss/flex.scss";
+// @import "~src/scss/index.scss";
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html {
+    font-family: Montserrat-Regular, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+}
+
+body {
+    background-color: #fafafa;
+}
+
+.no-pointer-events {
+    pointer-events: none;
+}
+
+.container {
+    box-shadow: 0px 0px 6px rgb(0 0 0 / 25%);
+}
+
+.mat-list-item.is-active {
+    background: #969696 !important;
+    color: #fff;
+}
+
+app-book {
+    .mat-paginator-range-label {
+        display: none;
+    }
+    .mat-column-year .mat-sort-header-container {
+        justify-content: end;
+    }
+    .mat-column-published .mat-sort-header-container {
+        justify-content: center;
+    }
+    .form-book .form-field__footer .mat-form-field-wrapper {
+        width: 90%;
+        margin: auto;
+    }
+}

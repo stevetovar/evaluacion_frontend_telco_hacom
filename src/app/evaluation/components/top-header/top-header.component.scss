@@ -1,0 +1,44 @@
+@import "~src/scss/mixins.scss";
+
+.toolbar {
+    justify-content: space-between;
+    background-color: #424242;
+    height: 60px;
+}
+
+.toolbar__left {
+    display: flex;
+    align-items: center;
+    .logo {
+        margin-right: 1rem;
+    }
+}
+
+.toolbar__right {
+    display: flex;
+    align-items: center;
+    .img-account {
+        margin-left: 1rem;
+        background: #ccc;
+        clip-path: circle(50%);
+        cursor: pointer;
+    }
+    .img-logout {
+        margin-left: 2rem;
+    }
+}
+
+.toolbar__user {
+    text-align: left;
+    font-size: 1rem;
+    font-weight: 400;
+    p {
+        margin: 0
+    }
+    .rol {
+        display: none;
+        @include tablet-portrait() {
+            display: block;
+        }
+    }
+}

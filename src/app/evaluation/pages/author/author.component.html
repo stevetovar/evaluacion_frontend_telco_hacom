@@ -1,0 +1,64 @@
+
+<h3>Nuevo Libro</h3>
+<form class="form-book" name="form">
+    <div class="form-field">
+        <mat-form-field floatLabel="always" appearance="standard">
+            <mat-label>Título</mat-label>
+            <input matInput name="title" [(ngModel)]="book.title" required>
+        </mat-form-field>
+    </div>
+    <div class="form-field">
+        <mat-form-field floatLabel="always" appearance="standard">
+            <mat-label>Descripción</mat-label>
+            <textarea matInput name="description" [(ngModel)]="book.description" required></textarea>
+        </mat-form-field>
+    </div>
+    <div class="form-field">
+        <mat-form-field class="flex flex-75" floatLabel="always" appearance="standard">
+            <mat-label>Autor</mat-label>
+            <!-- [formControl]="myControl" -->
+            <input type="search"
+                placeholder="Buscar autor"
+                aria-label="author"
+                matInput
+                required
+                name="author"
+                (input)="getSuggestedAuthor(searchAuthorText)"
+                [(ngModel)]="book.author"
+                [matAutocomplete]="auto">
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="selectAuthor($event)">
+                <!-- <mat-option *ngFor="let option of suggestedAuthors | async" [value]="option"> -->
+                <mat-option *ngFor="let author of suggestedAuthors" [value]="author">
+                    {{author}}
+                </mat-option>
+                <mat-option value="" *ngIf="!suggestedAuthors.length && searchAuthorText.length">
+                    No encontró ningún resultado
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+        <div class="flex flex-25 btn-search">
+            <button class="" mat-raised-button color="accent" (click)="addAuthor(author)">
+                Nuevo Autor
+            </button>
+        </div>
+    </div>
+    <div class="form-field">
+        <mat-form-field  class="flex flex-50" floatLabel="always" appearance="standard">
+            <mat-label>Publicado</mat-label>
+            <input matInput name="published" [(ngModel)]="book.published">
+            <!-- <mat-checkbox [formControl]="hideRequiredControl" name="published">Hide required marker</mat-checkbox> -->
+        </mat-form-field>
+        <mat-form-field  class="flex flex-50" floatLabel="always" appearance="standard">
+            <mat-label>Año</mat-label>
+            <input matInput name="year" [(ngModel)]="book.year">
+        </mat-form-field>
+    </div>
+    <div class="form-field__footer">
+        <button class="btn-accept" mat-raised-button color="accent" (click)="saveBook($event, book)">
+            Aceptar
+        </button>
+        <button class="btn-cancel" mat-raised-button color="accent" (click)="resetBook()">
+            Cancelar
+        </button>
+    </div>
+</form>
