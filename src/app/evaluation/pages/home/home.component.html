@@ -4,8 +4,10 @@
         <mat-drawer mode="side" opened class="app-sidenav">
             <app-menu></app-menu>
         </mat-drawer>
-        <mat-drawer-content class="app-content" >
-            <router-outlet></router-outlet>
+        <mat-drawer-content class="app-content">
+            <div class="page">
+                <router-outlet></router-outlet>
+            </div>
         </mat-drawer-content>
     </mat-drawer-container>
 </div>

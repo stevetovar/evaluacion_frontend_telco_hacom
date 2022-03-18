@@ -18,7 +18,7 @@ const lorem = new LoremIpsum();
 
 function generateAuthor() {
     return {
-        id: uuid.v4(),
+        id: uuid.v4().replaceAll('-', ''),
         title: lorem.generateWords(Math.floor(2 + Math.random() * 3)),
         year: generateRandomDate(),
         description: lorem.generateWords(Math.floor(4 + Math.random() * 11)),

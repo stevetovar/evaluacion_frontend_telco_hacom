@@ -13,11 +13,23 @@ export class BookService {
     private baseUrl: string = environment.baseUrl;
     constructor(private http: HttpClient) {}
 
-    getBooks(params: {} = {}):Observable<Book[]> {
+    getBooks(params: {} = {}): Observable<Book[]> {
         return this.http.get<Book[]>(`${this.baseUrl}/book`);
     }
 
-    addBook(book: Book):Observable<Book> {
+    getBook(id: string): Observable<Book> {
+        return this.http.get<Book>(`${this.baseUrl}/book/${id}`);
+    }
+
+    addBook(book: Book): Observable<Book> {
         return this.http.post<Book>(`${this.baseUrl}/book`, book);
+    }
+
+    updateBook(book: Book): Observable<Book> {
+        return this.http.put<Book>(`${this.baseUrl}/book`, book);
+    }
+
+    deleteBook(id: string): Observable<Book> {
+        return this.http.delete<Book>(`${this.baseUrl}/book`);
     }
 }

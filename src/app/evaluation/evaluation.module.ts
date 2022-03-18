@@ -9,8 +9,8 @@ import { MaterialModule } from '../material/material.module';
 import { SharedModule } from '../shared/shared.module';
 
 import { HomeComponent } from './pages/home/home.component';
-import { AuthorComponent } from './pages/author/author.component';
 import { BookComponent } from './pages/book/book.component';
+import { BookListComponent } from './pages/booklist/booklist.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { BarDiagramComponent } from './components/bar-diagram/bar-diagram.component';
 import { EchartComponent } from './components/echart/echart.component';
@@ -23,12 +23,14 @@ import { PrintyearPipe } from '../pipes/printyear.pipe';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { MatInputModule } from '@angular/material/input';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+import { AuthorComponent } from './pages/author/author.component';
+
 
 @NgModule({
     declarations: [
         HomeComponent,
-        AuthorComponent,
         BookComponent,
+        BookListComponent,
         DashboardComponent,
         BarDiagramComponent,
         EchartComponent,
@@ -37,6 +39,7 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
         MenuComponent,
         PrintbooleanPipe,
         PrintyearPipe,
+        AuthorComponent,
     ],
     imports: [
         CommonModule,
@@ -51,7 +54,7 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
     providers: [
         {
             provide: MatPaginatorIntl,
-            useClass: BookComponent
+            useClass: BookListComponent
         },
         {
             provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,

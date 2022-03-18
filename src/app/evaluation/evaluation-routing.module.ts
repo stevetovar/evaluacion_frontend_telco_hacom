@@ -3,8 +3,9 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './pages/home/home.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { AuthorComponent } from './pages/author/author.component';
 import { BookComponent } from './pages/book/book.component';
+import { BookListComponent } from './pages/booklist/booklist.component';
+import { AuthorComponent } from './pages/author/author.component';
 // import { ContentComponent } from './content/content.component';
 
 
@@ -16,10 +17,18 @@ const routes: Routes = [
         children: [
             {
                 path: 'books',
+                component: BookListComponent,
+            },
+            {
+                path: 'book/:id',
                 component: BookComponent,
             },
             {
-                path: 'authors',
+                path: 'book',
+                component: BookComponent,
+            },
+            {
+                path: 'author',
                 component: AuthorComponent,
             },
             {

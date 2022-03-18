@@ -58,4 +58,23 @@ app-book {
         width: 90%;
         margin: auto;
     }
+    .mat-card-header-text {
+        display: none;
+    }
+}
+
+app-book {
+    width: 90%;
+    background: #fff;
+    display: flex;
+    margin: 2em auto;
+}
+
+.mat-list-option:hover,
+.mat-list-option:focus,
+.mat-nav-list .mat-list-item:hover,
+.mat-nav-list .mat-list-item:focus,
+.mat-action-list .mat-list-item:hover,
+.mat-action-list .mat-list-item:focus {
+    background: rgba(0,0,0,0.05);
 }
