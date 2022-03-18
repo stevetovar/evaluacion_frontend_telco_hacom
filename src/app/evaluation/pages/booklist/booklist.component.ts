@@ -9,10 +9,12 @@ import { MatDialog } from '@angular/material/dialog';
 // import {catchError, map, startWith, switchMap, tap} from 'rxjs/operators';
 // import { HttpParams } from '@angular/common/http';
 
-import { Book } from '../../interfaces/book.interface';
 import { BookService } from '../../services/book.services';
 import { ConfirmDialogComponent } from './../../components/confirm-dialog/confirm-dialog.component';
+
+import { Author } from '../../interfaces/author.interface';
 import { IIndexable } from '../../interfaces/indexable.interface';
+import { Book } from '../../interfaces/book.interface';
 
 @Component({
     selector: 'app-booklist',
@@ -37,7 +39,7 @@ export class BookListComponent extends MatPaginatorIntl implements AfterViewInit
         duration: 4000,
     }
 
-    @ViewChild(MatTable) table!: MatTable<Book>;
+    @ViewChild(MatTable) table!: MatTable<Author>;
     @ViewChild(MatSort) sort!: MatSort;
     @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -62,10 +64,10 @@ export class BookListComponent extends MatPaginatorIntl implements AfterViewInit
                 this.dataSource.paginator = this.paginator;
                 this.dataSource.sort = this.sort;
 
-                this.dataSource.sortingDataAccessor = (item, property) => {
+                this.dataSource.sortingDataAccessor = (book, property) => {
                     switch(property) {
-                    case 'author': return item.author && item.author.name;
-                    default: return (item as IIndexable)[property];
+                    case 'author': return book.author?.name ?? undefined;
+                    default: return (book as IIndexable)[property];
                     }
                 };
                 // console.log("🚀 ~ this.dataSource", this.dataSource)
@@ -97,7 +99,8 @@ export class BookListComponent extends MatPaginatorIntl implements AfterViewInit
             data: { id },
         });
         dialog.afterClosed()
-            .subscribe(() => {
+            .subscribe(result => {
+                if (!result) return;
                 this.bookService.deleteBook(id)
                     .subscribe(resp => {
                         if (!this.dataSource.paginator) return;

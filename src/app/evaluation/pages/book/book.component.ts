@@ -1,9 +1,9 @@
 import { AuthorDialogComponent } from './../../components/author-dialog/author-dialog.component';
-import { map, tap } from 'rxjs/operators';
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { ActivatedRoute, Router } from '@angular/router';
 import { of, switchMap } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 
 import { Author } from '../../interfaces/author.interface';
 import { Book } from '../../interfaces/book.interface';
@@ -11,6 +11,7 @@ import { BookService } from '../../services/book.services';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { FormControl, NgForm } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { PrintyearPipe } from 'src/app/pipes/printyear.pipe';
 
 const defaultBook: Book = {
     id: undefined,
@@ -30,7 +31,8 @@ const defaultBook: Book = {
 @Component({
     selector: 'app-book',
     templateUrl: './book.component.html',
-    styleUrls: ['./book.component.scss']
+    styleUrls: ['./book.component.scss'],
+    providers: [ PrintyearPipe ]
 })
 
 export class BookComponent implements OnInit {
@@ -58,6 +60,7 @@ export class BookComponent implements OnInit {
         private router: Router,
         private snackBar: MatSnackBar,
         private dialog: MatDialog,
+        private printyearPipe: PrintyearPipe,
     ) {}
 
     ngOnInit(): void {
@@ -74,11 +77,12 @@ export class BookComponent implements OnInit {
                     return this.bookService.getBook(id);
                 })
             ).subscribe(book => {
-                console.log("🚀 ~ book", book)
-
+                book.year = Number(this.printyearPipe.transform(book.year));
                 if (!book) return;
                 this.editMode = true;
-                this.book = this.originalBook = book;
+                this.originalBook = {...book};
+                this.book = {...book};
+                // console.log("🚀 ~ book", book)
             })
     }
 
@@ -99,14 +103,18 @@ export class BookComponent implements OnInit {
 
     @ViewChild('miFormulario') form!: NgForm;
 
-    @ViewChild('addAuthorButtonRef') addAuthorButtonRef!: ElementRef<HTMLButtonElement>;
+    // @ViewChild('addAuthorButtonRef') addAuthorButtonRef!: ElementRef<HTMLButtonElement>;
     addAuthor() {
         const dialog = this.dialog.open(AuthorDialogComponent, {
             width: '560px',
         });
         dialog.afterClosed()
             .subscribe(author => {
-                this.book.author = author;
+                if (!author) return;
+                this.bookService.addAuthor(author)
+                    .subscribe(author => {
+                        this.book.author = author;
+                    })
             })
     }
 
@@ -126,6 +134,7 @@ export class BookComponent implements OnInit {
 
     // @ViewChild('cancelButtonRef') cancelButtonRef!: ElementRef<HTMLButtonElement>;
     resetBook() {
+        console.log("🚀 ~ resetBook")
         // const target: HTMLButtonElement = this.cancelButtonRef.nativeElement;
         this.book = this.originalBook;
     }

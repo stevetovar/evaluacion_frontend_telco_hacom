@@ -1,4 +1,4 @@
-import { Book } from "../evaluation/interfaces/book.interface";
+import { Author } from "../evaluation/interfaces/book.interface";
 // const  Book = require("../evaluation/interfaces/book.interface");
 
 const fs = require('fs');
@@ -6,17 +6,17 @@ const uuid = require('uuid');
 const LoremIpsum = require('lorem-ipsum').LoremIpsum;
 
 const data = fs.readFileSync('book.json', 'utf8');
-const jsonFile: Book[] = JSON.parse(data);
+const jsonFile: Author[] = JSON.parse(data);
 console.log(jsonFile.length);
 
 // const boosk: Book[] = [];
 let authors: string[] = [];
-jsonFile.forEach((obj: Book) => authors.push(obj.author?.name ?? ''));
+jsonFile.forEach((obj: Author) => authors.push(obj.author?.name ?? ''));
 authors = authors.filter(name => name);
 
 const lorem = new LoremIpsum();
 
-function generateAuthor() {
+function generateBook() {
     return {
         id: uuid.v4().replaceAll('-', ''),
         title: lorem.generateWords(Math.floor(2 + Math.random() * 3)),
@@ -42,18 +42,21 @@ function generateAuthorName() {
     return `${name1} - ${name2} - ${name3}`;
 }
 
-function pushAuthor() {
+function generateDB() {
     // const minRangeValue = 4000;
     // const maxRangeValue = 12000;
     const minRangeValue = 14;
     const maxRangeValue = 35;
-    const totalNewAuthors = Math.floor(maxRangeValue + Math.random() * (maxRangeValue - minRangeValue + 1));
-    const newAuthors = [];
-    for (let i = 0; i < totalNewAuthors; ++i) {
-        const author = generateAuthor();
-        newAuthors.push(author);
+    const totalNewBooks = Math.floor(maxRangeValue + Math.random() * (maxRangeValue - minRangeValue + 1));
+    const newBooks = [];
+    for (let i = 0; i < totalNewBooks; ++i) {
+        const book = generateBook();
+        newBooks.push(book);
     }
-    return JSON.stringify(newAuthors);
+    return JSON.stringify({
+        books: newBooks,
+        authors: authors,
+    });
 }
 
-fs.writeFileSync('book.json', pushAuthor());
+fs.writeFileSync('book.json', generateDB());
