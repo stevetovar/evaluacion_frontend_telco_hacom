@@ -1,5 +1,5 @@
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 export interface dataDialog {
     id: string
@@ -11,22 +11,17 @@ export interface dataDialog {
     styleUrls: ['./confirm-dialog.component.scss']
 })
 
-export class ConfirmDialogComponent implements OnInit {
-    idBook: string = '';
-
+export class ConfirmDialogComponent {
     constructor(
         private dialogRef: MatDialogRef<ConfirmDialogComponent>,
         @Inject(MAT_DIALOG_DATA) public data: dataDialog,
     ) { }
 
-    ngOnInit(): void {
-    }
-
     cancel() {
-        this.dialogRef.close(true);
+        this.dialogRef.close();
     }
 
     continue() {
-        this.dialogRef.close();
+        this.dialogRef.close(true);
     }
 }

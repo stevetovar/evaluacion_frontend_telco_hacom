@@ -1,15 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'app-echart',
     templateUrl: './echart.component.html',
     styleUrls: ['./echart.component.scss']
 })
-export class EchartComponent implements OnInit {
 
+export class EchartComponent {
     constructor() { }
-
-    ngOnInit(): void {
-    }
 
 }

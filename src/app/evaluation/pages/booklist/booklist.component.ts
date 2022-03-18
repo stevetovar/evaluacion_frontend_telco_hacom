@@ -1,11 +1,12 @@
-import { Component, AfterViewInit, ViewChild, OnInit, Inject } from '@angular/core';
-import {MatPaginator, MatPaginatorIntl} from '@angular/material/paginator';
+import { Component, AfterViewInit, ViewChild } from '@angular/core';
+import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
-import {MatSort, SortDirection} from '@angular/material/sort';
+import { MatSort, SortDirection } from '@angular/material/sort';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
+import { switchMap } from 'rxjs';
 
-// import {merge, Observable, of as observableOf} from 'rxjs';
+// import { merge, Observable, ofasobservableOf, switchMap } from 'rxjs';
 // import {catchError, map, startWith, switchMap, tap} from 'rxjs/operators';
 // import { HttpParams } from '@angular/common/http';
 
@@ -128,6 +129,7 @@ export class BookListComponent extends MatPaginatorIntl implements AfterViewInit
                         this.dataSource.data = this.dataSource.data.splice(index, 1) && this.dataSource.data;
                         this.searchBookText = '';
                         this.snackBar.open('Libro eliminado', 'Exitosamente', this.snackBarOption);
+                        this.dataSource.data = this.dataSource.data.splice(index, 1) && this.dataSource.data;
                         // this.table.renderRows();
                     })
             })

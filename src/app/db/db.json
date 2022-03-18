@@ -1,30 +1,6 @@
 {
   "book": [
     {
-      "id": "fdd69dee3b264c118415d2da99f08b33",
-      "title": "consequat pariatur",
-      "year": "2022-02-24T22:55:13.813Z",
-      "description": "pariatur proident est magna sint reprehenderit",
-      "published": true,
-      "author": {
-        "id": "12ff3eb65e84493594c583c8f6770fab",
-        "name": "David Cross - Gabe Zichermann - Bruce Trask",
-        "genre": "male"
-      }
-    },
-    {
-      "id": "f78d7700259a46b68538a694f3a6133e",
-      "title": "minim duis elit",
-      "year": "2021-12-24T17:07:40.512Z",
-      "description": "minim in voluptate quis laboris do consequat qui",
-      "published": true,
-      "author": {
-        "id": "7c09c8f0f8794af195c025dbea415bad",
-        "name": "Joshua D. Suereth - Jonathan Campos - Jignesh Malavia",
-        "genre": "male"
-      }
-    },
-    {
       "id": "96b16582c19b40c6a8e45e12a757da41",
       "title": "magna et nostrud exercitation",
       "year": "2021-12-03T16:43:34.781Z",
