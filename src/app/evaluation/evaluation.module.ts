@@ -16,7 +16,7 @@ import { BarDiagramComponent } from './components/bar-diagram/bar-diagram.compon
 import { EchartComponent } from './components/echart/echart.component';
 import { ContentComponent } from './components/content/content.component';
 import { TopHeaderComponent } from './components/top-header/top-header.component';
-import { MenuComponent } from './components/menu/menu.component';
+import { LeftMenuComponent } from './components/leftmenu/leftmenu.component';
 
 import { PrintbooleanPipe } from '../pipes/printboolean.pipe';
 import { PrintyearPipe } from '../pipes/printyear.pipe';
@@ -37,7 +37,7 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
         EchartComponent,
         ContentComponent,
         TopHeaderComponent,
-        MenuComponent,
+        LeftMenuComponent,
         PrintbooleanPipe,
         PrintyearPipe,
         AuthorComponent,

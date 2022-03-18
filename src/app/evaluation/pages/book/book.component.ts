@@ -1,13 +1,24 @@
-import { tap } from 'rxjs/operators';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { map, tap } from 'rxjs/operators';
+import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { ActivatedRoute, Router } from '@angular/router';
-import { switchMap } from 'rxjs';
+import { of, switchMap } from 'rxjs';
 
 import { Author } from '../../interfaces/author.interface';
 import { Book } from '../../interfaces/book.interface';
 import { BookService } from '../../services/book.services';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+
+const defaultBook: Book = {
+    id: undefined,
+    title: undefined,
+    description: undefined,
+    year: undefined,
+    idAuthor: undefined,
+    author: undefined,
+    published: undefined,
+    registeredDate: undefined,
+}
 
 @Component({
     selector: 'app-book',
@@ -19,7 +30,8 @@ export class BookComponent implements OnInit {
     searchAuthorText: string = '';
     selectedAuthor: Author | undefined;
     suggestedAuthors: Author[] = [];
-    book: Book;
+    originalBook: Book = {...defaultBook};
+    book: Book = {...defaultBook};
     author!: Author;
     editMode: boolean = false;
 
@@ -34,27 +46,25 @@ export class BookComponent implements OnInit {
         private activedRoute: ActivatedRoute,
         private router: Router,
         private snackBar: MatSnackBar,
-    ) {
-        this.book = {
-            id: undefined,
-            title: undefined,
-            description: undefined,
-            year: undefined,
-            idAuthor: undefined,
-            author: undefined,
-            published: undefined,
-            registeredDate: undefined,
-        };
-    }
+    ) {}
 
     ngOnInit(): void {
         this.activedRoute.params
             .pipe(
-                switchMap(({ id }) => this.bookService.getBook(id))
+                map(params => {
+                    if (!params) return;
+                    const { id } = params;
+                    if (!id) return;
+                    return id;
+                }),
+                switchMap(id => {
+                    if (!id) return of();
+                    return this.bookService.getBook(id);
+                })
             ).subscribe(book => {
                 if (!book) return;
                 this.editMode = true;
-                this.book = book;
+                this.book = this.originalBook = book;
             })
     }
 
@@ -73,6 +83,7 @@ export class BookComponent implements OnInit {
         this.searchAuthorText = result;
     }
 
+    @ViewChild('addAuthorButtonRef') addAuthorButtonRef!: ElementRef<HTMLButtonElement>;
     addAuthor(author: Author) {}
 
     addBook(book: Book) {
@@ -88,19 +99,9 @@ export class BookComponent implements OnInit {
             })
     }
 
-    // @Output() resetBookEvent: EventEmitter<void> = new EventEmitter();
-
+    @ViewChild('cancelButtonRef') cancelButtonRef!: ElementRef<HTMLButtonElement>;
     resetBook() {
-        this.book = {
-            id: undefined,
-            title: undefined,
-            description: undefined,
-            year: undefined,
-            idAuthor: undefined,
-            author: undefined,
-            published: undefined,
-            registeredDate: undefined,
-        };
-        //this.resetBookEvent.emit();
+        // const target: HTMLButtonElement = this.cancelButtonRef.nativeElement;
+        this.book = this.originalBook;
     }
 }

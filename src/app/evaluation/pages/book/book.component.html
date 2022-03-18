@@ -41,7 +41,7 @@
                         </mat-autocomplete>
                     </mat-form-field>
                     <div class="flex flex-25 btn-search">
-                        <button class="" mat-raised-button color="accent" (click)="addAuthor(author)">
+                        <button class="" #addAuthorButtonRef mat-raised-button color="accent" (click)="addAuthor(author)">
                             Nuevo Autor
                         </button>
                     </div>
@@ -63,7 +63,7 @@
     <mat-divider></mat-divider>
     <mat-card-actions>
         <div class="form-book__footer">
-            <button class="btn-cancel" mat-stroked-button color="primary" (click)="resetBook()">
+            <button #cancelButtonRef class="btn-cancel" mat-stroked-button color="primary" (click)="resetBook()">
                 Cancelar
             </button>
             <button class="btn-accept" mat-raised-button color="primary" type="submit">
