@@ -29,7 +29,7 @@ export class BookService {
         return this.http.put<Book>(`${this.baseUrl}/book`, book);
     }
 
-    deleteBook(id: string): Observable<Book> {
-        return this.http.delete<Book>(`${this.baseUrl}/book`);
+    deleteBook(id: string): Observable<any> {
+        return this.http.delete<Book>(`${this.baseUrl}/book/${id}`);
     }
 }

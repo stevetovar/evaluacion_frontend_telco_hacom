@@ -77,13 +77,13 @@
                         <th mat-header-cell *matHeaderCellDef class="th-action">
                             <span>Acción</span>
                         </th>
-                        <td mat-cell *matCellDef="let book" class="td-action">
-                            <a mat-icon-button class="" aria-label="edit book" #tooltipEdit="matTooltip" matTooltip="editar"
+                        <td mat-cell *matCellDef="let book; let index = index" class="td-action">
+                            <a mat-icon-button color="accent" class="" aria-label="edit book" #tooltipEdit="matTooltip" matTooltip="editar"
                             [routerLink]="['../book/', book.id]">
                                 <mat-icon mat-list-icon>edit_outline</mat-icon>
                             </a>
-                            <button mat-icon-button class="" aria-label="delete book" #tooltipDelete="matTooltip" matTooltip="eliminar"
-                            (click)="removeBook(book.id)">
+                            <button mat-icon-button color="accent" class="" aria-label="delete book" #tooltipDelete="matTooltip" matTooltip="eliminar"
+                            (click)="removeBook(book.id, index)">
                                 <mat-icon mat-list-icon>delete_outline</mat-icon>
                             </button>
                         </td>

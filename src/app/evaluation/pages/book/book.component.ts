@@ -1,12 +1,13 @@
 import { tap } from 'rxjs/operators';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs';
 
 import { Author } from '../../interfaces/author.interface';
 import { Book } from '../../interfaces/book.interface';
 import { BookService } from '../../services/book.services';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 
 @Component({
     selector: 'app-book',
@@ -22,9 +23,17 @@ export class BookComponent implements OnInit {
     author!: Author;
     editMode: boolean = false;
 
+    snackBarOption: MatSnackBarConfig = {
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+        duration: 4000,
+    }
+
     constructor(
         private bookService: BookService,
         private activedRoute: ActivatedRoute,
+        private router: Router,
+        private snackBar: MatSnackBar,
     ) {
         this.book = {
             id: undefined,
@@ -70,7 +79,12 @@ export class BookComponent implements OnInit {
         const serviceName = this.book.id ? 'updateBook' : 'addBook';
         this.bookService[serviceName](book)
             .subscribe(resp => {
-                console.log("🚀 ~ resp successful ---", resp)
+                if (!this.book.id) {
+                    this.router.navigate(['/book/' + book.id]);
+                    this.snackBar.open('Libro creado', 'Exitosamente', this.snackBarOption);
+                } else {
+                    this.snackBar.open('Libro editado', 'Exitosamente', this.snackBarOption);
+                }
             })
     }
 

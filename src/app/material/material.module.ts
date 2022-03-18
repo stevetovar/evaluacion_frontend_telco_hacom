@@ -12,12 +12,13 @@ import { MatListModule } from '@angular/material/list';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSortModule } from '@angular/material/sort';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatTooltipModule} from '@angular/material/tooltip';
-import {MatCardModule} from '@angular/material/card';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
     exports: [
@@ -34,10 +35,11 @@ import {MatCardModule} from '@angular/material/card';
         MatPaginatorModule,
         MatProgressSpinnerModule,
         MatSelectModule,
+        MatSidenavModule,
+        MatSnackBarModule,
         MatSortModule,
         MatTableModule,
         MatToolbarModule,
-        MatSidenavModule,
         MatTooltipModule,
         MatCardModule,
     ],

@@ -24,6 +24,7 @@ import { MatPaginatorIntl } from '@angular/material/paginator';
 import { MatInputModule } from '@angular/material/input';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { AuthorComponent } from './pages/author/author.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { AuthorComponent } from './pages/author/author.component';
         PrintbooleanPipe,
         PrintyearPipe,
         AuthorComponent,
+        ConfirmDialogComponent,
     ],
     imports: [
         CommonModule,

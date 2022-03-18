@@ -1,7 +1,9 @@
-import { Component, AfterViewInit, ViewChild, OnInit } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, OnInit, Inject } from '@angular/core';
 import {MatPaginator, MatPaginatorIntl} from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import {MatSort, SortDirection} from '@angular/material/sort';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
 
 // import {merge, Observable, of as observableOf} from 'rxjs';
 // import {catchError, map, startWith, switchMap, tap} from 'rxjs/operators';
@@ -9,6 +11,7 @@ import {MatSort, SortDirection} from '@angular/material/sort';
 
 import { Book } from '../../interfaces/book.interface';
 import { BookService } from '../../services/book.services';
+import { ConfirmDialogComponent } from './../../components/confirm-dialog/confirm-dialog.component';
 
 @Component({
     selector: 'app-booklist',
@@ -27,11 +30,20 @@ export class BookListComponent extends MatPaginatorIntl implements AfterViewInit
     dataSourceLength: number = 0;
     isLoadingResults: boolean = false;
 
-    @ViewChild(MatPaginator) paginator!: MatPaginator;
+    snackBarOption: MatSnackBarConfig = {
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+        duration: 4000,
+    }
+
+    @ViewChild(MatTable) table!: MatTable<Book>;
     @ViewChild(MatSort) sort!: MatSort;
+    @ViewChild(MatPaginator) paginator!: MatPaginator;
 
     constructor(
         private bookService: BookService,
+        private snackBar: MatSnackBar,
+        private dialog: MatDialog,
         // private activedRoute: ActivatedRoute,
     ) {
         super();
@@ -49,6 +61,7 @@ export class BookListComponent extends MatPaginatorIntl implements AfterViewInit
                 this.dataSourceLength = resp.length;
                 this.dataSource.paginator = this.paginator;
                 this.dataSource.sort = this.sort;
+                // console.log("🚀 ~ this.dataSource", this.dataSource)
             });
     }
 
@@ -89,23 +102,34 @@ export class BookListComponent extends MatPaginatorIntl implements AfterViewInit
     applySearchFilter(event: Event) {
         const filterValue = (event.target as HTMLInputElement).value;
         this.dataSource.filter = filterValue.trim().toLowerCase();
-
-        if (this.dataSource.paginator) {
-            this.dataSource.paginator.firstPage();
-        }
+        if (this.dataSource.paginator) this.dataSource.paginator.firstPage();
     }
 
     getBook(id: string) {
+        if (!id.trim().length) return;
         this.bookService.getBook(id)
             .subscribe(resp => {
                 console.log("🚀 ~ resp succesfull get", resp)
             })
     }
 
-    removeBook(id: string) {
-        this.bookService.deleteBook(id)
-            .subscribe(resp => {
-                console.log("🚀 ~ resp succesfull removed", resp)
+    removeBook(id: string, index: number) {
+        if (!id.trim().length) return;
+        if (Number.isNaN(index)) return;
+        const dialog = this.dialog.open(ConfirmDialogComponent, {
+            width: '360px',
+            data: { id },
+        });
+        dialog.afterClosed()
+            .subscribe(() => {
+                this.bookService.deleteBook(id)
+                    .subscribe(resp => {
+                        if (!this.dataSource.paginator) return;
+                        this.dataSource.data = this.dataSource.data.splice(index, 1) && this.dataSource.data;
+                        this.searchBookText = '';
+                        this.snackBar.open('Libro eliminado', 'Exitosamente', this.snackBarOption);
+                        // this.table.renderRows();
+                    })
             })
     }
 }
