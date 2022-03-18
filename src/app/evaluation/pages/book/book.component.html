@@ -3,12 +3,12 @@
         <h2>{{editMode ? 'Editar' : 'Agregar'}} Libro</h2>
         <mat-divider></mat-divider>
     <mat-card-content>
-        <form class="form-book" name="form" (submit)="addBook(book)">
+        <form class="form-book" #form="ngForm" name="form" (ngSubmit)="submitForm()" autocomplete="off">
             <section class="form-book__main">
                 <section class="form-field">
                     <mat-form-field floatLabel="always" appearance="outline">
                         <mat-label>Título</mat-label>
-                        <input matInput name="title" [(ngModel)]="book.title" required autocomplete="off">
+                        <input matInput name="title" [(ngModel)]="book.title" type="search" required>
                     </mat-form-field>
                 </section>
                 <section class="form-field">
@@ -20,7 +20,6 @@
                 <section class="form-field">
                     <mat-form-field class="flex flex-75" floatLabel="always" appearance="outline">
                         <mat-label>Autor</mat-label>
-                        <!-- [formControl]="myControl" -->
                         <input type="search"
                             placeholder="Buscar autor"
                             aria-label="author"
@@ -28,7 +27,7 @@
                             required
                             name="author"
                             (input)="getSuggestedAuthor(searchAuthorText)"
-                            [(ngModel)]="book.author"
+                            [(ngModel)]="book.author!.name"
                             [matAutocomplete]="auto">
                         <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="selectAuthor($event)">
                             <!-- <mat-option *ngFor="let option of suggestedAuthors | async" [value]="option"> -->
@@ -41,19 +40,20 @@
                         </mat-autocomplete>
                     </mat-form-field>
                     <div class="flex flex-25 btn-search">
-                        <button class="" #addAuthorButtonRef mat-raised-button color="accent" (click)="addAuthor(author)">
+                        <button class="" #addAuthorButtonRef mat-raised-button color="accent" (click)="addAuthor()">
                             Nuevo Autor
                         </button>
                     </div>
                 </section>
                 <section class="form-field">
                     <mat-form-field class="flex flex-20" floatLabel="always" appearance="outline">
-                        <input matInput [hidden]="true" autocomplete="off">
+                        <input matInput [hidden]="true">
                         <mat-checkbox class="" [(ngModel)]="book.published" name="published">Publicado</mat-checkbox>
                     </mat-form-field>
                     <mat-form-field  class="flex flex-15" floatLabel="always" appearance="outline">
                         <mat-label>Año</mat-label>
-                        <input matInput name="year" [(ngModel)]="book.year" [disabled]="!book.published" [readonly]="!book.published" autocomplete="off">
+                        <input matInput name="year" [min]="minYear" [max]="maxYear" [(ngModel)]="book.year" type="number"
+                        [disabled]="!book.published" [readonly]="!book.published">
                     </mat-form-field>
                     <div class="flex-65"></div>
                 </section>
@@ -63,10 +63,11 @@
     <mat-divider></mat-divider>
     <mat-card-actions>
         <div class="form-book__footer">
-            <button #cancelButtonRef class="btn-cancel" mat-stroked-button color="primary" (click)="resetBook()">
+            <button class="btn-cancel" mat-stroked-button color="primary" (click)="resetBook()" >
                 Cancelar
             </button>
-            <button class="btn-accept" mat-raised-button color="primary" type="submit">
+            <button class="btn-accept" mat-raised-button color="primary" type="submit" (ngSubmit)="submitForm()"
+            [disabled]="form.pending || form.invalid">
                 {{editMode ? 'Actualizar' : 'Crear'}}
             </button>
         </div>

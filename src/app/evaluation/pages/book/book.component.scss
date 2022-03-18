@@ -50,6 +50,9 @@ h2, h3 {
         width: 100%;
         // font-size: 1rem;
     }
+    textarea {
+        max-height: 250px;
+    }
 }
 
 .mat-button-base {

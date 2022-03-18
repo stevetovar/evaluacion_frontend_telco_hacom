@@ -1,0 +1,19 @@
+<h2 mat-dialog-title>Nuevo Author</h2>
+<mat-divider></mat-divider>
+<div mat-dialog-content class="flex">
+    <form class="form" #form="ngForm" name="form">
+        <mat-form-field class="flex flex-100 w100" floatLabel="always" appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <input matInput name="name" [(ngModel)]="author.name" type="search" required>
+        </mat-form-field>
+        <mat-form-field class="flex flex-100 w100" floatLabel="always" appearance="outline">
+            <mat-label>Género</mat-label>
+            <input matInput name="gender" [(ngModel)]="author.gender" type="search" required>
+        </mat-form-field>
+    </form>
+</div>
+<mat-divider></mat-divider>
+<div mat-dialog-actions>
+    <button mat-button mat-dialog-close color="stroked" (click)="cancel()">Cancelar</button>
+    <button mat-button mat-raised-button color="warn" (click)="continue()">Aceptar</button>
+</div>

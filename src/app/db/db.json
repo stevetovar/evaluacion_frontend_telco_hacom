@@ -1,42 +1,6 @@
 {
   "book": [
     {
-      "id": "96b16582c19b40c6a8e45e12a757da41",
-      "title": "magna et nostrud exercitation",
-      "year": "2021-12-03T16:43:34.781Z",
-      "description": "sunt elit elit nulla veniam ullamco consectetur tempor tempor",
-      "published": true,
-      "author": {
-        "id": "86d00ccc8c8a4c3b881f190cc2ebeaad",
-        "name": "Early Stephens - Steven J. Gutz - Monsur Hossain",
-        "genre": "female"
-      }
-    },
-    {
-      "id": "bcc9e25b145e43b1bd8232ae4b74986e",
-      "title": "ea eu",
-      "year": "2022-03-06T00:37:14.498Z",
-      "description": "eu mollit mollit id sunt nostrud incididunt non laborum sit et",
-      "published": true,
-      "author": {
-        "id": "676123311d1f427f959df4c858dc9c7a",
-        "name": "Kalen Delaney - Dierk König - Chris Buckett",
-        "genre": "female"
-      }
-    },
-    {
-      "id": "8e4f658fdca143b5b7f82f1e32a93a38",
-      "title": "ipsum enim",
-      "year": "2022-01-08T06:04:56.416Z",
-      "description": "enim ut fugiat aliqua est adipisicing incididunt velit",
-      "published": true,
-      "author": {
-        "id": "0e2ce1bdc4cb4df190a02f5d413d2132",
-        "name": "Jared Armstrong - Warren Sande - Robin Anil",
-        "genre": "male"
-      }
-    },
-    {
       "id": "3eef0796541f4a579144ae5e7a77094e",
       "title": "in ex ullamco sunt",
       "year": "2021-12-25T02:21:45.601Z",
@@ -277,22 +241,7 @@
       }
     },
     {
-      "id": "JF1yBgn"
-    },
-    {
-      "id": "VauZRVA"
-    },
-    {
-      "id": "AJGAFjZ"
-    },
-    {
-      "id": "LuAphsu"
-    },
-    {
-      "id": "X-WQ85p"
-    },
-    {
-      "id": "4CEP8Qe"
+      "id": "Ym6w4sP"
     }
   ]
 }

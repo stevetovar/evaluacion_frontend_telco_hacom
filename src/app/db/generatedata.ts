@@ -24,7 +24,7 @@ function generateAuthor() {
         description: lorem.generateWords(Math.floor(4 + Math.random() * 11)),
         published: true,
         "author": {
-            id: uuid.v4(),
+            id: uuid.v4().replaceAll('-', ''),
             name: generateAuthorName(),
             genre: Math.random() > 0.5 ? 'female' : 'male',
         }
