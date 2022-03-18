@@ -21,6 +21,8 @@ import { MenuComponent } from './components/menu/menu.component';
 import { PrintbooleanPipe } from '../pipes/printboolean.pipe';
 import { PrintyearPipe } from '../pipes/printyear.pipe';
 import { MatPaginatorIntl } from '@angular/material/paginator';
+import { MatInputModule } from '@angular/material/input';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 
 @NgModule({
     declarations: [
@@ -36,14 +38,6 @@ import { MatPaginatorIntl } from '@angular/material/paginator';
         PrintbooleanPipe,
         PrintyearPipe,
     ],
-    // exports: [
-    //     HomeComponent,
-    //     BarDiagramComponent,
-    //     EchartComponent,
-    //     ContentComponent,
-    //     MenuComponent,
-    //     TopHeaderComponent,
-    // ],
     imports: [
         CommonModule,
         FormsModule,
@@ -52,10 +46,17 @@ import { MatPaginatorIntl } from '@angular/material/paginator';
         EvaluationRoutingModule,
         MaterialModule,
         SharedModule,
+        MatInputModule
     ],
-    providers: [{
-        provide: MatPaginatorIntl,
-        useClass: BookComponent
-    }]
+    providers: [
+        {
+            provide: MatPaginatorIntl,
+            useClass: BookComponent
+        },
+        {
+            provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+            useValue: {floatLabel: 'always'} // always | never | auto
+        }
+    ]
 })
 export class EvaluationModule { }
