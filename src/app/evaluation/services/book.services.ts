@@ -13,7 +13,7 @@ export class BookService {
     private baseUrl: string = environment.baseUrl;
     constructor(private http: HttpClient) {}
 
-    getBooks():Observable<Book[]> {
+    getBooks(params: {} = {}):Observable<Book[]> {
         return this.http.get<Book[]>(`${this.baseUrl}/book`);
     }
 

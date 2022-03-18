@@ -1,3 +1,4 @@
+import { HttpParams } from '@angular/common/http';
 import { Component, AfterViewInit, ViewChild } from '@angular/core';
 import {MatPaginator, MatPaginatorIntl} from '@angular/material/paginator';
 import {MatSort, SortDirection} from '@angular/material/sort';
@@ -19,10 +20,10 @@ export class BookComponent extends MatPaginatorIntl implements AfterViewInit {
     searchBookText: string = '';
 
     displayedColumns: string[] = ['id', 'title', 'description', 'year', 'author', 'published', 'action'];
-    // getBooks!: Observable<Book[]> | null;
-    // dataSource: MatTableDataSource<Book>;
-    dataSource: Book[];
+    dataSource!: MatTableDataSource<Book>;
+    // dataSource: Book[];
 
+    pageSize: number = 5;
     dataSourceLength: number = 0;
     isLoadingResults: boolean = false;
 
@@ -36,53 +37,59 @@ export class BookComponent extends MatPaginatorIntl implements AfterViewInit {
         this.itemsPerPageLabel = 'Por página';
         this.nextPageLabel = 'Siguiente';
         this.previousPageLabel = 'Anterior';
-        // this.bookService.getBooks()
-        //     .subscribe(resp => {
-        //         console.log("🚀 ~ resp", resp);
-        //         this.dataSourceLength = resp.length;
-        //         this.dataSource = new MatTableDataSource(resp);
-        //     }) ;
         this.dataSourceLength = 2;
         const newBooks = Array.from({length: this.dataSourceLength}, (_, k) => createEmptyRow());
-        this.dataSource = newBooks;
-        // this.dataSource = new MatTableDataSource(newBooks);
+        this.dataSource = new MatTableDataSource(newBooks);
+        this.bookService.getBooks().
+            subscribe(resp => {
+                this.dataSource = new MatTableDataSource(resp);
+                this.dataSourceLength = resp.length;
+                this.dataSource.paginator = this.paginator;
+                this.dataSource.sort = this.sort;
+            });
     }
 
     ngAfterViewInit() {
+        // console.log("🚀 ~ this.dataSource", this.dataSource)
         // this.dataSource.paginator = this.paginator;
         // this.dataSource.sort = this.sort;
-        this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
 
-        merge(this.sort.sortChange, this.paginator.page)
-            .pipe(
-                tap(() => this.isLoadingResults = true),
-                startWith({}),
-                switchMap(() => {
-                    return this.bookService.getBooks()
-                    // return this.getBooks({  // implement
-                    //     this.sort.active,
-                    //     this.sort.direction,
-                    //     this.paginator.pageIndex,
-                    // }).pipe(catchError(() => observableOf(null)));
-                }),
-                map(data => {
-                    console.log("🚀 ~ data", data)
-                    this.isLoadingResults = false;
-                    if (!data) return [];
-                    this.dataSourceLength = data.length;
-                    return data;
-                }),
-            )
-            .subscribe(data => (this.dataSource = data));
+        // this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
+        // merge(this.sort.sortChange, this.paginator.page)
+        //     .pipe(
+        //         tap(() => this.isLoadingResults = true),
+        //         startWith({}),
+        //         switchMap(() => {
+        //             const params = new HttpParams()
+        //                 .set('sort_direction', 'down')
+        //                 .set('query', this.searchBookText);
+        //                 .set('limit', this.pageSize);
+        //             return this.bookService.getBooks(params)
+        //                 .pipe(catchError(() => observableOf(null)));
+        //         }),
+        //         map(data => {
+        //             console.log("🚀 ~ data", data)
+        //             this.isLoadingResults = false;
+        //             if (!data) {
+        //                 this.dataSourceLength = 2;
+        //                 const newBooks = Array.from({length: this.dataSourceLength}, (_, k) => createEmptyRow());
+        //                 return this.dataSource = newBooks;
+        //             } else {
+        //                 this.dataSourceLength = data.length;
+        //                 return data;
+        //             }
+        //         }),
+        //     )
+        //     .subscribe(data => (this.dataSource = data));
     }
 
     applySearchFilter(event: Event) {
-        // const filterValue = (event.target as HTMLInputElement).value;
-        // this.dataSource.filter = filterValue.trim().toLowerCase();
+        const filterValue = (event.target as HTMLInputElement).value;
+        this.dataSource.filter = filterValue.trim().toLowerCase();
 
-        // if (this.dataSource.paginator) {
-        //     this.dataSource.paginator.firstPage();
-        // }
+        if (this.dataSource.paginator) {
+            this.dataSource.paginator.firstPage();
+        }
     }
 }
 
@@ -97,4 +104,18 @@ function createEmptyRow(): Book {
         published: undefined,
         registeredDate: undefined
     };
+    // return {
+    //     id: 'undefined',
+    //     title: 'undefined',
+    //     description: 'undefined',
+    //     year: new Date(+(new Date()) - Math.floor(Math.random()*1000000000000)).getFullYear(),
+    //     idAuthor: 'undefined',
+    //     author: {
+    //         name: 'undefined',
+    //         id: 'nudefined',
+    //         gender: 'undefined',
+    //     },
+    //     published: true,
+    //     registeredDate: 'undefined'
+    // };
 }

@@ -55,7 +55,8 @@
                         <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-year">
                             <span>Año</span>
                         </th>
-                        <td mat-cell *matCellDef="let book" class="td-year"> {{book.year | date | printyear }} </td>
+                        <td mat-cell *matCellDef="let book" class="td-year"> {{book.year | printyear }} </td>
+                        <!-- <td mat-cell *matCellDef="let book" class="td-year"> {{book.year | date | printyear }} </td> -->
                     </ng-container>
 
                     <!-- NameAutor Column -->
@@ -102,8 +103,8 @@
         </div>
         <mat-paginator
             [pageSizeOptions]="[5, 10, 15]"
-            [length]="42"
-            [pageSize]="10"
+            [length]="dataSourceLength"
+            [pageSize]="pageSize"
             [showFirstLastButtons]="true"
             firstPageLabel="Primera página"
             lastPageLabel="Última página"
