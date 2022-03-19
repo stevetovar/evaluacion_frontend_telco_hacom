@@ -1,9 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Author } from '../../interfaces/author.interface';
-import { v4 as uuidv4 } from 'uuid';
 import { NgForm } from '@angular/forms';
 import { BookService } from '../../services/book.services';
+
+const hash = require('object-hash');
+// import { v4 as uuidv4 } from 'uuid';
 
 export interface gender {
     id: string,
@@ -34,7 +36,7 @@ export class AuthorDialogComponent {
 
     @ViewChild('miFormulario') form!: NgForm;
     author: Author = {
-        id: uuidv4().replaceAll('-', ''),
+        id: undefined,
         name: undefined,
         gender: undefined,
     }
@@ -44,7 +46,12 @@ export class AuthorDialogComponent {
     }
 
     continue() {
+        const formattedName = this.author.name?.trim() || '';
+        this.author.name = formattedName.length ? formattedName : undefined;
         if (this.form && (this.form.pending || this.form.invalid)) this.form.control.markAllAsTouched;
-        else this.dialogRef.close(this.author);
+        else {
+            this.author.id = hash(this.author.name);
+            this.dialogRef.close(this.author);
+        }
     }
 }

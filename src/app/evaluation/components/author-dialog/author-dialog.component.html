@@ -9,7 +9,7 @@
         <mat-form-field class="flex flex-100 w100" floatLabel="always" appearance="outline">
             <mat-label>Género</mat-label>
             <mat-select name="gender" [(ngModel)]="author.gender">
-                <mat-option *ngFor="let gender of genders" [value]="gender" required>
+                <mat-option *ngFor="let gender of genders" [value]="gender.label" required>
                   {{gender.label | titlecase}}
                 </mat-option>
             </mat-select>

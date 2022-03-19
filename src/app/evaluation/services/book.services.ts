@@ -52,7 +52,7 @@ export class BookService {
 
     addAuthor(author: Author): Observable<Author> {
         if (!author) return of();
-        console.log('addAuthor')
+        console.log("🚀 ~ author", author)
         return this.http.get<Author>(`${this.baseUrl}/authors/${author.id}`)
             .pipe(
                 switchMap(author => {

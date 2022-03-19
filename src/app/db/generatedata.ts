@@ -1,8 +1,9 @@
-import { Author } from "../evaluation/interfaces/book.interface";
+import { Author } from "../evaluation/interfaces/author.interface";
 // const  Book = require("../evaluation/interfaces/book.interface");
 
-const fs = require('fs');
 const uuid = require('uuid');
+const hash = require('object-hash');
+const fs = require('fs');
 const LoremIpsum = require('lorem-ipsum').LoremIpsum;
 
 const data = fs.readFileSync('book.json', 'utf8');
@@ -11,12 +12,13 @@ console.log(jsonFile.length);
 
 // const boosk: Book[] = [];
 let authors: string[] = [];
-jsonFile.forEach((obj: Author) => authors.push(obj.author?.name ?? ''));
+jsonFile.forEach((obj: Author) => authors.push(obj.name ?? ''));
 authors = authors.filter(name => name);
 
 const lorem = new LoremIpsum();
 
 function generateBook() {
+    const authorName = generateAuthorName();
     return {
         id: uuid.v4().replaceAll('-', ''),
         title: lorem.generateWords(Math.floor(2 + Math.random() * 3)),
@@ -24,8 +26,8 @@ function generateBook() {
         description: lorem.generateWords(Math.floor(4 + Math.random() * 11)),
         published: true,
         "author": {
-            id: uuid.v4().replaceAll('-', ''),
-            name: generateAuthorName(),
+            id: hash(authorName),
+            name: authorName,
             genre: Math.random() > 0.5 ? 'female' : 'male',
         }
     }
