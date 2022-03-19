@@ -121,7 +121,11 @@ export class BookComponent implements OnInit {
         });
         dialog.afterClosed()
             .subscribe(author => {
-                if (!author) return;
+                if (!author) {
+                    (<HTMLElement>document.activeElement)!.blur();
+                    this.snackBar.open('Error, libro no creado', 'Inténtelo de nuevo', this.snackBarOption);
+                    return;
+                }
                 this.bookService.addAuthor(author)
                     .subscribe(author => {
                         this.book.author = <DefaultAuthor>author;
@@ -135,6 +139,8 @@ export class BookComponent implements OnInit {
         const serviceName = this.book.id ? 'updateBook' : 'addBook';
         this.bookService[serviceName](this.book)
             .subscribe(resp => {
+                if (!resp) return;
+                this.originalBook = {...(<DefaultBook>resp)};
                 if (!this.book.id) {
                     this.router.navigate(['/app/book', resp.id]);
                     this.snackBar.open('Libro creado', 'Exitosamente', this.snackBarOption);

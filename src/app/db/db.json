@@ -2,8 +2,8 @@
   "books": [
     {
       "id": "3eef0796541f4a579144ae5e7a77094e",
-      "title": "in ex ullamco sunt",
-      "year": "2021-12-25T02:21:45.601Z",
+      "title": "in ex ullamco suntxxxxXXXxxxxx",
+      "year": 2019,
       "description": "velit excepteur magna veniam laboris eu",
       "published": true,
       "author": {
@@ -321,9 +321,6 @@
     {
       "id": "7026bf57e5a644a88fc53f83a4abb657",
       "name": "Tim Maher - Thierry Templier - Michael D. Galpin"
-    },
-    {
-      "id": "02ed4635b15d412f960944fcea41b8a9"
     }
   ]
 }

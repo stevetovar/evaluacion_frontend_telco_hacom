@@ -67,7 +67,7 @@
             <button class="btn-cancel" mat-stroked-button color="primary" (click)="resetBook()" type="button">
                 Cancelar
             </button>
-            <button class="btn-accept" mat-raised-button color="primary" type="submit" (ngSubmit)="submitForm()"
+            <button class="btn-accept" mat-raised-button color="primary" type="submit" (click)="submitForm()"
             [disabled]="form.pending || form.invalid || this.form.pristine">
                 {{editionMode ? 'Actualizar' : 'Crear'}}
             </button>
