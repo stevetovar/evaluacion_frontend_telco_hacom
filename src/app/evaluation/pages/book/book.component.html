@@ -1,6 +1,6 @@
 <mat-card>
     <mat-card-header></mat-card-header>
-        <h2>{{editMode ? 'Editar' : 'Agregar'}} Libro</h2>
+        <h2>{{editionMode ? 'Editar' : 'Agregar'}} Libro</h2>
         <mat-divider></mat-divider>
     <mat-card-content>
         <form class="form-book" #form="ngForm" name="form" (ngSubmit)="submitForm()" autocomplete="off" (keydown.enter)="$event.preventDefault()">
@@ -28,7 +28,7 @@
                             required
                             name="author"
                             (input)="getSuggestedAuthor(searchAuthorText)"
-                            [(ngModel)]="book.author!.name"
+                            [(ngModel)]="book.author.name"
                             [matAutocomplete]="auto">
                         <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="selectAuthor($event)">
                             <!-- <mat-option *ngFor="let option of suggestedAuthors | async" [value]="option"> -->
@@ -68,8 +68,8 @@
                 Cancelar
             </button>
             <button class="btn-accept" mat-raised-button color="primary" type="submit" (ngSubmit)="submitForm()"
-            [disabled]="form.pending || form.invalid">
-                {{editMode ? 'Actualizar' : 'Crear'}}
+            [disabled]="form.pending || form.invalid || this.form.pristine">
+                {{editionMode ? 'Actualizar' : 'Crear'}}
             </button>
         </div>
     </mat-card-actions>

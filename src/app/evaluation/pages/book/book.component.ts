@@ -13,17 +13,29 @@ import { FormControl, NgForm } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { PrintyearPipe } from 'src/app/pipes/printyear.pipe';
 
-const defaultBook: Book = {
+interface DefaultAuthor {
+    id: undefined,
+    name: undefined,
+    gender: undefined,
+}
+
+export interface DefaultBook extends Omit<Book, 'author'> {
+    author: DefaultAuthor
+}
+
+const defaultAuthor = {
+    id: undefined,
+    name: undefined,
+    gender: undefined,
+}
+
+const defaultBook: DefaultBook = {
     id: undefined,
     title: undefined,
     description: undefined,
     year: undefined,
     idAuthor: undefined,
-    author: {
-        id: undefined,
-        name: undefined,
-        gender: undefined,
-    },
+    author: defaultAuthor,
     published: undefined,
     registeredDate: undefined,
 }
@@ -39,11 +51,12 @@ export class BookComponent implements OnInit {
     searchAuthorText: string = '';
     selectedAuthor: Author | undefined;
     suggestedAuthors: Author[] = [];
-    originalBook: Book = {...defaultBook};
-    book: Book = {...defaultBook};
+    originalBook: DefaultBook = {...defaultBook};
+    book: DefaultBook = {...defaultBook};
     author!: Author;
 
-    editMode: boolean = false;
+    // editedForm: boolean = false;
+    editionMode: boolean = false;
     formControl!: FormControl;
     minYear: number = 1455;
     maxYear: number = new Date().getFullYear();
@@ -63,6 +76,8 @@ export class BookComponent implements OnInit {
         private printyearPipe: PrintyearPipe,
     ) {}
 
+    @ViewChild('form') form!: NgForm;
+
     ngOnInit(): void {
         this.activedRoute.params
             .pipe(
@@ -77,12 +92,11 @@ export class BookComponent implements OnInit {
                     return this.bookService.getBook(id);
                 })
             ).subscribe(book => {
-                book.year = Number(this.printyearPipe.transform(book.year));
                 if (!book) return;
-                this.editMode = true;
-                this.originalBook = {...book};
-                this.book = {...book};
-                // console.log("🚀 ~ book", book)
+                book.year = Number(this.printyearPipe.transform(book.year));
+                this.editionMode = true;
+                this.originalBook = <DefaultBook>{...book};
+                this.book = <DefaultBook>{...book};
             })
     }
 
@@ -101,9 +115,6 @@ export class BookComponent implements OnInit {
         this.searchAuthorText = result;
     }
 
-    @ViewChild('miFormulario') form!: NgForm;
-
-    // @ViewChild('addAuthorButtonRef') addAuthorButtonRef!: ElementRef<HTMLButtonElement>;
     addAuthor() {
         const dialog = this.dialog.open(AuthorDialogComponent, {
             width: '560px',
@@ -113,14 +124,15 @@ export class BookComponent implements OnInit {
                 if (!author) return;
                 this.bookService.addAuthor(author)
                     .subscribe(author => {
-                        this.book.author = author;
+                        this.book.author = <DefaultAuthor>author;
+                        this.form.control.markAsTouched();
+                        this.form.control.markAsDirty();
                     })
             })
     }
 
     submitForm() {
         const serviceName = this.book.id ? 'updateBook' : 'addBook';
-        console.log("🚀 ~ serviceName", serviceName)
         this.bookService[serviceName](this.book)
             .subscribe(resp => {
                 if (!this.book.id) {
@@ -132,10 +144,11 @@ export class BookComponent implements OnInit {
             })
     }
 
-    // @ViewChild('cancelButtonRef') cancelButtonRef!: ElementRef<HTMLButtonElement>;
     resetBook() {
-        console.log("🚀 ~ resetBook")
-        // const target: HTMLButtonElement = this.cancelButtonRef.nativeElement;
-        this.book = this.originalBook;
+        this.form.control.markAsUntouched();
+        this.form.control.markAsPristine();
+        this.book = {...this.originalBook};
+        // this.form.reset();
+        // this.form.reset(this.originalBook);
     }
 }
