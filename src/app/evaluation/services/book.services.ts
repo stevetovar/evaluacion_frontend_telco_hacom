@@ -1,4 +1,4 @@
-import { map, switchMap } from 'rxjs/operators';
+import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
@@ -52,13 +52,11 @@ export class BookService {
 
     addAuthor(author: Author): Observable<Author> {
         if (!author) return of();
-        console.log("🚀 ~ author", author)
         return this.http.get<Author>(`${this.baseUrl}/authors/${author.id}`)
             .pipe(
-                switchMap(author => {
-                    if (!author) return of();
-                    return this.http.post<Author>(`${this.baseUrl}/books`, author);
-                }),
+                catchError(error => {
+                    return this.http.post<Author>(`${this.baseUrl}/books`, author)
+                })
             )
         // return this.http.post<Author>(`${this.baseUrl}/authors`, author);
     }

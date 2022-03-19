@@ -239,88 +239,113 @@
         "name": "Tim Maher - Thierry Templier - Michael D. Galpin",
         "genre": "female"
       }
+    },
+    {
+      "id": "84a1abd351cc3caa8d6d7fe975cddbb75c8aac9e",
+      "name": "Linus Torvaldx3",
+      "gender": "masculino"
     }
   ],
   "authors": [
     {
       "id": "86f5b83e4e5f4aea87a8a0b83babc2cc",
-      "name": "Bob Lee - Kalen Delaney - Kenneth P. Birman"
+      "name": "Bob Lee - Kalen Delaney - Kenneth P. Birman",
+      "genre": "female"
     },
     {
       "id": "e5ced3c08b084e939ed844061ff56fbe",
-      "name": "Cédric Champeau - John D'Emic - Gavin King"
+      "name": "Cédric Champeau - John D'Emic - Gavin King",
+      "genre": "female"
     },
     {
       "id": "a7c94205dcd64305886b5ee248bacfd9",
-      "name": "Daniel Selman - Chris Cunningham - Joshua Noble"
+      "name": "Daniel Selman - Chris Cunningham - Joshua Noble",
+      "genre": "male"
     },
     {
       "id": "7e291ba2b3524f5682e7b4a48491e6b0",
-      "name": "Erik Hatcher - Joakim Sunden - Michael McCandless"
+      "name": "Erik Hatcher - Joakim Sunden - Michael McCandless",
+      "genre": "female"
     },
     {
       "id": "b30e3aeed9e749fb9ca005c5a1c55270",
-      "name": "Ken Rimple - Ted G. Lewis - Bradley Austin Davis"
+      "name": "Ken Rimple - Ted G. Lewis - Bradley Austin Davis",
+      "genre": "female"
     },
     {
       "id": "b97be71d9d994d53bf162d34c5d4053d",
-      "name": "Ajamu A. Wesley - Josh C. Powell - Ronny Richardson"
+      "name": "Ajamu A. Wesley - Josh C. Powell - Ronny Richardson",
+      "genre": "female"
     },
     {
       "id": "6efa88b2546b47199781b08e98c0e78c",
-      "name": "Greg Low - Timothy Potter - David Winterfeldt"
+      "name": "Greg Low - Timothy Potter - David Winterfeldt",
+      "genre": "male"
     },
     {
       "id": "fcfac39e77704bc69d57d4285f59f7f0",
-      "name": "Jeffery Hicks - Gary Gregory - Bruce Payette"
+      "name": "Jeffery Hicks - Gary Gregory - Bruce Payette",
+      "genre": "female"
     },
     {
       "id": "a04aad6c248140a199516ef39266646e",
-      "name": "Anthony Patton - Christian Bauer - Foreword by Paul Gaffney"
+      "name": "Anthony Patton - Christian Bauer - Foreword by Paul Gaffney",
+      "genre": "female"
     },
     {
       "id": "0dad0c8143d247fca7b90407d47e1a87",
-      "name": "Lasse Koskela - Barry J. Shepherd - Peter Ledbrook"
+      "name": "Lasse Koskela - Barry J. Shepherd - Peter Ledbrook",
+      "genre": "male"
     },
     {
       "id": "69b9a56f46544008be10557debf3453f",
-      "name": "Jim Wooley - Joey Lott - Don Jones"
+      "name": "Jim Wooley - Joey Lott - Don Jones",
+      "genre": "male"
     },
     {
       "id": "984a15edcdfe423e932b87c0c7fec6cd",
-      "name": "Mala Gupta - Marc Harter - Marc Harter"
+      "name": "Mala Gupta - Marc Harter - Marc Harter",
+      "genre": "female"
     },
     {
       "id": "c9f71e8effd545de95d81c40af748c3a",
-      "name": "Alexandre de Castro Alves - Foreword by Paul Gaffney - Prasad A. Chodavarapu"
+      "name": "Alexandre de Castro Alves - Foreword by Paul Gaffney - Prasad A. Chodavarapu",
+      "genre": "male"
     },
     {
       "id": "a7f1d749641841b2819b1cde43c7ab44",
-      "name": "Patrick Lightbody - Ian W. Stirk - Brian Ford"
+      "name": "Patrick Lightbody - Ian W. Stirk - Brian Ford",
+      "genre": "male"
     },
     {
       "id": "301b8718c4c74ab98332ba276f2c58b9",
-      "name": "Ryan Breidenbach - Bruce A. Tate - Compiled"
+      "name": "Ryan Breidenbach - Bruce A. Tate - Compiled",
+      "genre": "male"
     },
     {
       "id": "cbf0d0c53ccd44b9a2f79cde0bae6fc9",
-      "name": "Anton Kovalyov - Paul Nielsen - James Shingler"
+      "name": "Anton Kovalyov - Paul Nielsen - James Shingler",
+      "genre": "male"
     },
     {
       "id": "e03ecc977379476689f755ec7f0ad21d",
-      "name": "Chris Shiflett - Thierry Templier - Dmitry Babenko"
+      "name": "Chris Shiflett - Thierry Templier - Dmitry Babenko",
+      "genre": "female"
     },
     {
       "id": "74c421410c9c4a05a2a3813904345615",
-      "name": "Michael Barlotta - Jacob K. Andresen - Jordan Hochenbaum"
+      "name": "Michael Barlotta - Jacob K. Andresen - Jordan Hochenbaum",
+      "genre": "female"
     },
     {
       "id": "376a788fed294a5a9e1dbbf675a7b078",
-      "name": "Timothy D. Korson - Eric Pulier and Hugh Taylor - Alex Holmes"
+      "name": "Timothy D. Korson - Eric Pulier and Hugh Taylor - Alex Holmes",
+      "genre": "male"
     },
     {
       "id": "7026bf57e5a644a88fc53f83a4abb657",
-      "name": "Tim Maher - Thierry Templier - Michael D. Galpin"
+      "name": "Tim Maher - Thierry Templier - Michael D. Galpin",
+      "genre": "female"
     }
   ]
 }

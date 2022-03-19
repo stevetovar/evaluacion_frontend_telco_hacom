@@ -128,6 +128,7 @@ export class BookComponent implements OnInit {
                 }
                 this.bookService.addAuthor(author)
                     .subscribe(author => {
+                        console.log("🚀 from component ~ author", author)
                         this.book.author = <DefaultAuthor>author;
                         this.form.control.markAsTouched();
                         this.form.control.markAsDirty();
